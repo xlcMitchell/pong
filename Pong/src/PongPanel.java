@@ -15,6 +15,19 @@ import java.awt.BasicStroke;
 public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	
 	private final static int TIMER_DELAY = 5;
+	Ball ball;
+	Paddle paddle;
+	Paddle paddle1;
+	GameState gameState = GameState.INITIALISING;
+	public int panelHeight;
+	public int panelWidth;
+	
+	public void createObjects() {
+		ball = new Ball();
+		paddle = new Paddle(Player.One,getWidth(),getHeight());
+		paddle1 = new Paddle(Player.Two,getWidth(),getHeight());
+	}
+	
 	
 	public PongPanel() {
 		setBackground(Color.black);
@@ -53,7 +66,21 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	//The method which will be used to update each from of the game
 	
 	public void update(){
+		switch(gameState) {
+		case INITIALISING: {
+			createObjects();
+			gameState = GameState.PLAYING;
+			break;
+		}
 		
+		case PLAYING:{
+			break;
+		}
+		
+		case GAMEOVER: {
+			break;
+		}
+		}
 	}
 	
 	@Override
@@ -61,6 +88,12 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
     super.paintComponent(g);
   
     paintDottedLine(g);
+    if(gameState != GameState.INITIALISING) {
+    	            paintSprite(g, ball);
+    	          }
+    paintSprite(g,ball);
+    paintSprite(g,paddle);
+    paintSprite(g,paddle1);
 	 }
 	
 	private void paintDottedLine(Graphics g) {
@@ -70,6 +103,17 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
              g2d.setPaint(Color.WHITE);
 		     g2d.drawLine(getWidth() / 2, 0, getWidth() / 2, getHeight());
 	         g2d.dispose();
+	        
 		 }
+	
+	private void paintSprite(Graphics g, Sprite sprite) {
+	     g.setColor(sprite.getColour());
+	     g.fillRect(sprite.getxPosition(), sprite.getyPosition(), sprite.getWidth(), sprite.getHeight());
+	}
+	
+	public void panelSize() {
+		this.panelHeight = getHeight();
+		this.panelWidth = getWidth();
+	}
 
 }

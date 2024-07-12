@@ -23,7 +23,7 @@ public class Pong extends JFrame {
 	          public void run() {
 	 
 	                 new Pong();
-	                 
+	                
 	 
 	          }
 	 

@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Rectangle;
 
+//sprite class will be the parent class for both the pong and paddle. It contains the position,velocity,colour etc
+
 public class Sprite {
  private int xPosition;
  private int yPosition;
@@ -20,10 +22,19 @@ public class Sprite {
 	 this.yPosition = y;
  }
  
+ //can use the same name for methods. We just have to have different different parameters
+ 
  public void setXPosition(int newX, int panelWidth) {
 	 xPosition = newX;
-	 if(newX < 0) {
+	 
+	 //this conditional statement checks to make sure that object has not gone off the screen
+	 //if the xPosition is less than 0 then it will have gone off the screen so we reset it to 0
+	 
+	 if(xPosition < 0) { 
 	    xPosition = 0;
+	    //if the xPosition + the width is greater than panels width then it will go off screen in
+	    //the other direction so we need to set the x position to the panels width less the width of 
+	    //the object
 	      }else if(xPosition + width > panelWidth) {
 	    	  xPosition = panelWidth - width;
 	      }
@@ -62,7 +73,7 @@ public class Sprite {
 	 this.colour = colour;
  }
  
- public Color getColour(Color colour) {
+ public Color getColour() {
 	 return this.colour;
  }
  
@@ -76,6 +87,8 @@ public class Sprite {
 	 setYPosition(initialYPosition);
  }
  
+
+ 
  public Rectangle getRectangle() {
 	 return new Rectangle(getxPosition(),getyPosition(),getWidth(),getHeight());
  }
@@ -86,4 +99,5 @@ public class Sprite {
  public int getyVelocity() {return yVelocity;}
  public int getWidth() {return width;}
  public int getHeight() {return height;}
+ 
 }

@@ -13,6 +13,8 @@ public class Ball extends Sprite {
 		setWidth(WIDTH);
 		setHeight(HEIGHT);
 		setColour(COLOUR);
+		setXVelocity(2);
+		setYVelocity(2);
 		
 		//800 for width and 600 for height. Don't know where to access screenWidth and screenHeight
 		
